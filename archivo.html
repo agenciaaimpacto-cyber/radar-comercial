@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archivo — Radar Comercial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16213D;
+    --ink-2: #1E2C4F;
+    --paper: #EDE6D6;
+    --amber: #C98A2C;
+    --amber-deep: #A66E1D;
+    --teal: #3C6E5C;
+    --text-on-ink: #EDE6D6;
+    --text-on-ink-dim: #9CA6C4;
+    --text-on-paper: #16213D;
+    --text-on-paper-dim: #5A5F6E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--ink); color: var(--text-on-ink); font-family: 'Inter', sans-serif; line-height: 1.5; }
+  header.masthead { border-bottom: 1px solid rgba(237,230,214,0.15); padding: 28px 24px 20px; max-width: 960px; margin: 0 auto; }
+  .brand { font-family: 'Zilla Slab', serif; font-weight: 700; font-size: 32px; letter-spacing: 0.5px; }
+  .brand span { color: var(--amber); }
+  nav a { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; text-decoration: none; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 24px 60px; }
+  .day-group { margin-bottom: 32px; }
+  .day-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--amber);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(237,230,214,0.1);
+  }
+  .archive-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(237,230,214,0.08);
+    text-decoration: none;
+    color: var(--text-on-ink);
+  }
+  .archive-item:hover .archive-title { color: var(--amber); }
+  .archive-title { font-family: 'Zilla Slab', serif; font-size: 16px; font-weight: 500; }
+  .archive-cat { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--text-on-ink-dim); white-space: nowrap; text-transform: uppercase; }
+  footer { max-width: 960px; margin: 0 auto; padding: 20px 24px 40px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-on-ink-dim); border-top: 1px solid rgba(237,230,214,0.1); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="brand">RADAR<span>·</span>COMERCIAL</div>
+  <nav style="margin-top:14px; display:flex; gap:18px;">
+    <a href="index.html" style="color:var(--text-on-ink-dim);">Hoy</a>
+    <a href="archivo.html" style="color:var(--amber); border-bottom:1px solid var(--amber); padding-bottom:2px;">Archivo</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="day-group">
+    <div class="day-label">Hoy — 06 agosto 2026</div>
+    <a class="archive-item" href="index.html">
+      <span class="archive-title">El 68% de las pymes chilenas que adoptan CRM abandonan la herramienta antes de los 6 meses</span>
+      <span class="archive-cat">Tendencias LATAM</span>
+    </a>
+    <a class="archive-item" href="#">
+      <span class="archive-title">WhatsApp Business supera al correo como primer canal de contacto en ventas B2C</span>
+      <span class="archive-cat">CRM</span>
+    </a>
+  </div>
+
+  <div class="day-group">
+    <div class="day-label">Ayer — 05 agosto 2026</div>
+    <a class="archive-item" href="#">
+      <span class="archive-title">Empresas que responden leads en menos de 5 minutos triplican su tasa de cierre</span>
+      <span class="archive-cat">Conversión</span>
+    </a>
+    <a class="archive-item" href="#">
+      <span class="archive-title">La IA generativa entra a los call centers de venta como copiloto, no como reemplazo</span>
+      <span class="archive-cat">Herramientas</span>
+    </a>
+    <a class="archive-item" href="#">
+      <span class="archive-title">Corredoras digitales de seguros crecen 22% interanual en Chile</span>
+      <span class="archive-cat">Regulación</span>
+    </a>
+  </div>
+
+  <div class="day-group">
+    <div class="day-label">04 agosto 2026</div>
+    <a class="archive-item" href="#">
+      <span class="archive-title">Por qué los formularios de contacto convierten peor que el botón directo a WhatsApp</span>
+      <span class="archive-cat">Conversión</span>
+    </a>
+    <a class="archive-item" href="#">
+      <span class="archive-title">El 40% de los CRM comprados en pymes nunca pasa de la etapa de configuración</span>
+      <span class="archive-cat">CRM</span>
+    </a>
+  </div>
+
+  <p style="margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--text-on-ink-dim);">
+    — cada despacho nuevo se suma aquí automáticamente, nada se elimina —
+  </p>
+
+</main>
+
+<footer>
+  RADAR COMERCIAL — archivo completo · maqueta con contenido de ejemplo
+</footer>
+
+</body>
+</html>

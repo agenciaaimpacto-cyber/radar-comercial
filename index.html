@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radar Comercial — Señales de ventas y comercio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16213D;
+    --ink-2: #1E2C4F;
+    --paper: #EDE6D6;
+    --paper-dim: #E2D9C4;
+    --amber: #C98A2C;
+    --amber-deep: #A66E1D;
+    --teal: #3C6E5C;
+    --red: #B23A2E;
+    --text-on-ink: #EDE6D6;
+    --text-on-ink-dim: #9CA6C4;
+    --text-on-paper: #16213D;
+    --text-on-paper-dim: #5A5F6E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--ink);
+    color: var(--text-on-ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+  }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+  .slab { font-family: 'Zilla Slab', serif; }
+
+  /* Masthead */
+  header.masthead {
+    border-bottom: 1px solid rgba(237,230,214,0.15);
+    padding: 28px 24px 20px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .brand {
+    font-family: 'Zilla Slab', serif;
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: 0.5px;
+    color: var(--text-on-ink);
+  }
+  .brand span { color: var(--amber); }
+  .masthead-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-on-ink-dim);
+    text-align: right;
+  }
+  .masthead-sub {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--text-on-ink-dim);
+    max-width: 520px;
+  }
+  .live-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+    margin-right: 6px;
+    animation: pulse 2s infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .live-dot { animation: none; }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Filter strip */
+  .filters {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 18px 24px 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 12px;
+    border: 1px solid rgba(237,230,214,0.25);
+    border-radius: 3px;
+    color: var(--text-on-ink-dim);
+    cursor: default;
+  }
+  .filter-tag.active {
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  /* Feed */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 24px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 720px) {
+    main { grid-template-columns: 1fr; }
+  }
+  .dispatch {
+    background: var(--paper);
+    color: var(--text-on-paper);
+    border-radius: 6px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    border-left: 3px solid var(--amber);
+  }
+  .dispatch.featured {
+    grid-column: 1 / -1;
+    border-left-color: var(--red);
+  }
+  .dispatch-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-on-paper-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .category {
+    color: var(--amber-deep);
+    font-weight: 500;
+  }
+  .dispatch h2 {
+    font-family: 'Zilla Slab', serif;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 1.25;
+  }
+  .dispatch.featured h2 { font-size: 26px; }
+  .dispatch p.summary {
+    font-size: 14.5px;
+    color: #3D4356;
+    line-height: 1.55;
+  }
+  .dispatch-footer {
+    margin-top: auto;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-on-paper-dim);
+    border-top: 1px solid rgba(22,33,61,0.1);
+  }
+  .source-link {
+    color: var(--teal);
+    text-decoration: none;
+  }
+  .source-link:hover { text-decoration: underline; }
+
+  footer {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 24px 40px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-on-ink-dim);
+    border-top: 1px solid rgba(237,230,214,0.1);
+  }
+
+  /* Subscribe block */
+  .subscribe {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 36px;
+  }
+  .subscribe-box {
+    background: var(--ink-2);
+    border: 1px solid rgba(237,230,214,0.12);
+    border-radius: 6px;
+    padding: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  .subscribe-copy h3 {
+    font-family: 'Zilla Slab', serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--text-on-ink);
+    margin-bottom: 4px;
+  }
+  .subscribe-copy p {
+    font-size: 13.5px;
+    color: var(--text-on-ink-dim);
+    max-width: 380px;
+  }
+  .subscribe-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+    min-width: 240px;
+  }
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--teal);
+    color: #EEF5F1;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+  }
+  .btn-whatsapp:hover { background: #345F50; }
+  .email-form {
+    display: flex;
+    gap: 8px;
+  }
+  .email-form input[type="email"] {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(237,230,214,0.3);
+    color: var(--text-on-ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    padding: 10px 12px;
+    border-radius: 4px;
+  }
+  .email-form input[type="email"]::placeholder { color: var(--text-on-ink-dim); }
+  .email-form button {
+    background: transparent;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    padding: 0 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .email-form button:hover { background: rgba(201,138,44,0.1); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="brand">RADAR<span>·</span>COMERCIAL</div>
+    <div class="masthead-meta">
+      <div><span class="live-dot"></span>SEÑAL ACTIVA</div>
+      <div>ÚLTIMA ACTUALIZACIÓN: HOY 07:04</div>
+    </div>
+  </div>
+  <div class="masthead-sub">
+    Despachos diarios sobre ventas, CRM, comportamiento comercial y herramientas — filtrado para dueños de negocio y consultores, no para especialistas en marketing.
+  </div>
+  <nav style="margin-top:14px; display:flex; gap:18px;">
+    <a href="index.html" style="font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.4px; color:var(--amber); text-decoration:none; border-bottom:1px solid var(--amber); padding-bottom:2px;">Hoy</a>
+    <a href="archivo.html" style="font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.4px; color:var(--text-on-ink-dim); text-decoration:none;">Archivo</a>
+  </nav>
+</header>
+
+<div class="filters">
+  <div class="filter-tag active">TODO</div>
+  <div class="filter-tag">CRM &amp; AUTOMATIZACIÓN</div>
+  <div class="filter-tag">CONVERSIÓN</div>
+  <div class="filter-tag">TENDENCIAS LATAM</div>
+  <div class="filter-tag">HERRAMIENTAS</div>
+</div>
+
+<main>
+
+  <article class="dispatch featured">
+    <div class="dispatch-meta">
+      <span class="category">Tendencias LATAM</span>
+      <span>Señal recibida hace 40 min</span>
+    </div>
+    <h2>El 68% de las pymes chilenas que adoptan CRM abandonan la herramienta antes de los 6 meses</h2>
+    <p class="summary">Un estudio reciente sobre adopción tecnológica en pequeñas empresas muestra que el problema no es la herramienta sino la falta de acompañamiento en la implementación — el mismo patrón que separa a las consultorías que solo venden licencias de las que se quedan hasta que el sistema funciona.</p>
+    <div class="dispatch-footer">
+      <span>Categoría: Comportamiento comercial</span>
+      <a class="source-link" href="#">Ver fuente →</a>
+    </div>
+    <div style="margin-top:4px; padding-top:12px; border-top:1px dashed rgba(22,33,61,0.15); font-size:12.5px; color:#5A5F6E;">
+      ¿Tu negocio tiene este mismo problema? <a href="https://dannymera.com" style="color:var(--amber-deep); font-weight:500; text-decoration:none;" target="_blank" rel="noopener">Pide un diagnóstico →</a>
+    </div>
+  </article>
+
+  <article class="dispatch">
+    <div class="dispatch-meta">
+      <span class="category">CRM &amp; Automatización</span>
+      <span>Hace 2 h</span>
+    </div>
+    <h2>WhatsApp Business supera al correo como primer canal de contacto en ventas B2C en la región</h2>
+    <p class="summary">Los tiempos de respuesta bajo 5 minutos duplican la tasa de conversión frente a formularios de contacto tradicionales.</p>
+    <div class="dispatch-footer">
+      <span>Fuente: reporte sectorial</span>
+      <a class="source-link" href="#">Ver fuente →</a>
+    </div>
+  </article>
+
+  <article class="dispatch">
+    <div class="dispatch-meta">
+      <span class="category">Herramientas</span>
+      <span>Hace 3 h</span>
+    </div>
+    <h2>Nuevas funciones de IA en plataformas de CRM permiten resumir conversaciones y sugerir el próximo paso</h2>
+    <p class="summary">La adopción crece entre equipos comerciales pequeños que no tienen analista de datos propio.</p>
+    <div class="dispatch-footer">
+      <span>Categoría: Producto</span>
+      <a class="source-link" href="#">Ver fuente →</a>
+    </div>
+  </article>
+
+  <article class="dispatch">
+    <div class="dispatch-meta">
+      <span class="category">Conversión</span>
+      <span>Hace 5 h</span>
+    </div>
+    <h2>Landing pages sin precio visible convierten mejor cuando hay sobredemanda, peor cuando el tráfico es frío</h2>
+    <p class="summary">Un análisis de más de 200 páginas de servicios profesionales confirma que la estrategia de precio oculto depende del volumen de leads entrante.</p>
+    <div class="dispatch-footer">
+      <span>Categoría: Estrategia</span>
+      <a class="source-link" href="#">Ver fuente →</a>
+    </div>
+  </article>
+
+  <article class="dispatch">
+    <div class="dispatch-meta">
+      <span class="category">Tendencias LATAM</span>
+      <span>Hace 6 h</span>
+    </div>
+    <h2>Corredoras de seguros digitales crecen 22% interanual en Chile impulsadas por portabilidad de desgravamen</h2>
+    <p class="summary">El cambio regulatorio de portabilidad sigue generando movimiento entre agentes independientes y brokers tradicionales.</p>
+    <div class="dispatch-footer">
+      <span>Categoría: Regulación</span>
+      <a class="source-link" href="#">Ver fuente →</a>
+    </div>
+  </article>
+
+</main>
+
+<div class="subscribe">
+  <div class="subscribe-box">
+    <div class="subscribe-copy">
+      <h3>Recibe el despacho del día</h3>
+      <p>Un resumen corto, directo a tu WhatsApp o tu correo — sin spam, solo lo que realmente cambia algo.</p>
+    </div>
+    <div class="subscribe-actions">
+      <a class="btn-whatsapp" href="https://wa.me/56900000000?text=Quiero%20recibir%20el%20despacho%20diario%20de%20Radar%20Comercial" target="_blank" rel="noopener">
+        Recibir por WhatsApp →
+      </a>
+      <form class="email-form" onsubmit="return false;">
+        <input type="email" placeholder="tu@correo.com" required>
+        <button type="submit">Suscribir</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  RADAR COMERCIAL — despacho diario automatizado · esto es una maqueta con contenido de ejemplo, no señales en vivo todavía
+</footer>
+
+</body>
+</html>
